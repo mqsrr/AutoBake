@@ -1,0 +1,30 @@
+body{
+    background: url("../Background.jpeg");
+    background-size:cover;
+}
+h1{
+align-content: center;
+color: rgb(158, 46, 46);
+font-weight: normal;
+font-family:fantasy;
+font-size: 400%;
+}
+
+p{
+    font-size: 120%;
+    font-weight: bold;
+    color: #fcfcfc;
+}
+table {border: 3px solid #c2c232;
+    width: 80%;
+}
+th, td {
+    border: 3px solid #c2c232 ;
+    text-align: center;
+    font-size: x-large;
+}
+.table_title{
+    font-size:xx-large;
+    color: rgb(238, 61, 61);
+
+}

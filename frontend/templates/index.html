@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Pizza Restaurant</title>
+    <link rel="stylesheet" href="../static/styles/styles.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <img src='../static/images/logo-removebg.png' alt="Pizza Restaurant Logo" class="logo">
+        <h1>Welcome to Our Pizza Restaurant</h1>
+        <nav>
+            <ul>
+                <li><a href="/frontend/static">Home</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/special_offers">Special Offers</a></li>
+                <li><a id="cart-link" href="/view_cart">Cart</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h2>Delicious Pizza Made Just for You</h2>
+        <p>Order now and enjoy our mouthwatering pizzas delivered straight to your doorstep.</p>
+        <a href="/menu" class="btn">Order Now</a>
+    </div>
+</section>
+
+<section class="about">
+    <div class="container">
+        <h2>About Us</h2>
+        <p>We are a passionate team of pizza enthusiasts dedicated to crafting the perfect pizza experience for you.
+            With our fresh ingredients, delicious toppings, and mouthwatering flavors, we guarantee a culinary journey
+            like no other.</p>
+        <p>Follow us on <a href="https://www.instagram.com/pizzarestraurant">Instagram</a> and <a
+                href="https://www.facebook.com/pizzarestraurant">Facebook</a> for behind-the-scenes and special offers!
+        </p>
+    </div>
+</section>
+
+<section class="menu">
+    <div class="container">
+        <h2>Our Menu</h2>
+        <div class="menu-items">
+            <div class="menu-item">
+                <img src="../static/images/pepperoni.jpg" alt="Pepperoni Pizza">
+                <h3>Pepperoni Pizza</h3>
+                <p>Classic pepperoni with mozzarella cheese</p>
+                <p class="price">$10.99</p>
+            </div>
+            <div class="menu-item">
+                <img src="../static/images/vegetarian.jpg" alt="Vegetarian Pizza">
+                <h3>Vegetarian Pizza</h3>
+                <p>Fresh veggies with tomato sauce and cheese</p>
+                <p class="price">$9.99</p>
+            </div>
+        </div>
+        <a href="/menu" class="btn">See Full Menu</a>
+    </div>
+</section>
+
+<section class="special-offers">
+    <div class="container">
+        <h2>Special Offers</h2>
+        <p>Check out our latest special offers and promotions!</p>
+        <div class="offer">
+            <h3>Family Meal Deal</h3>
+            <p>Get 2 large pizzas, 1 side, and a 2-liter drink for only $24.99!</p>
+            <p class="validity">Valid until April 30th</p>
+        </div>
+        <div class="offer">
+            <h3>Student Discount</h3>
+            <p>Show your student ID and get 10% off your order!</p>
+            <p class="validity">Valid all year round</p>
+        </div>
+    </div>
+</section>
+
+<section class="location">
+    <div class="container">
+        <h2>Location and Contact Information</h2>
+        <p>Address: 123 Main St, City, Country</p>
+        <p>Phone: 123-456-7890</p>
+        <p>Email: info@example.com</p>
+        <p>Operating Hours: Mon-Sun, 11:00 AM - 10:00 PM</p>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Pizza Restaurant. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+<script>
+    function getLoggedInCustomer() {
+        const jwtToken = JSON.parse(localStorage.getItem('jwt-token'))
+        if (jwtToken !== null) {
+            checkLoggedCustomer(jwtToken).catch(reason => console.log(reason))
+            return
+        }
+
+        const cartLink = document.getElementById('cart-link');
+        cartLink.href = '/auth/login'
+        cartLink.innerText = 'Login'
+    }
+
+    async function checkLoggedCustomer(jwtToken) {
+        const response = await fetch('http://145.93.173.20:8080/customers/me', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + jwtToken
+            },
+        })
+
+        if (response.ok) {
+            return
+        }
+        localStorage.clear()
+
+        const cartLink = document.getElementById('cart-link');
+        cartLink.href = '/auth/login'
+        cartLink.innerText = 'Login'
+    }
+    getLoggedInCustomer()
+</script>
+</html>

@@ -1,0 +1,23 @@
+/* CSS for the banners */
+.left-banner, .right-banner {
+    position: absolute;
+    top: 300px;
+    height: 10px;
+    width: -10%; /* Adjust width as needed */
+    text-align: center;
+    padding: -10px 0;
+}
+
+.left-banner {
+    left: 0;
+}
+
+.right-banner {
+    right: 0;
+}
+
+/* Adjust main content padding to avoid overlap with banners */
+.main-content {
+    padding-left: 10px; /* Adjust to accommodate both banners */
+    padding-right: 10px;
+}

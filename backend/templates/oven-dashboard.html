@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oven Dashboard</title>
+    <link rel="fonts" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/styles/oven-dashboard.css" type="text/css">
+</head>
+<body>
+   <div class="container">
+    <div class="order-column">
+        <h1>Oven Dashboard</h1>
+        {% for oven in ovens %}
+        <div class="oven-info">
+            <h2>Oven ID: {{ oven.id }}</h2>
+            <h2>Oven State:{% if oven.oven_state.value == 6 %} Waiting
+                {% elif oven.oven_state.value == 4 %} Ready to Start
+                {% elif oven.oven_state.value == 7 %} Cooking
+                {% elif oven.oven_state.value == 5 %} Done
+                {% else %} Unknown
+            {% endif %}</h2>
+            <!-- List of pizzas to cook -->
+            {% if oven.oven_state.value == 4 %}
+                <div class="pizza-list">
+                    <h3>Pizzas to Cook:</h3>
+                    <ul>
+                        {% for pizza in oven.pizzas_to_cook %}
+                            <li><span>Pizza:</span> {{ pizza.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if oven.oven_state.value == 7 %}
+                <div class="pizza-list">
+                    <h3>Pizzas Being Cooked:</h3>
+                    <ul>
+                        {% for pizza, cooking_order in oven.cooking_queue.items() %}
+                            <li><span>Cooking Order:</span> {{ cooking_order }} <span>Order ID: </span>{{ pizza.order_id }} <span>Pizza:</span> {{ pizza.title }} <span>Cooking Time:</span> {{ pizza.cooking_time }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="right-column">
+        <h2>Pizzas in Queue to Cook</h2>
+        <div class="pizza-list">
+            <ul>
+                {% for pizza in pizzas_in_queue_to_cook %}
+                    <li>{{ pizza.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function reloadPage() {
+        location.reload();
+    }
+    setInterval(reloadPage, 1000);
+</script>
+</html>

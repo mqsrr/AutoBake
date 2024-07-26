@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../static/styles/register.css">
+    <script src="../static/scripts/register.js" async></script>
+</head>
+<body>
+    <center>
+            <table>
+                <tr>
+                    <td>
+                        <h1>Register</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <form id="signupForm">
+                            <input aria-label="username" type="text" id="username" name="username" placeholder="Username" required>
+                            <input aria-label="password" type="password" id="password" name="password" placeholder="Password" required>
+                            <input aria-label="email" type="email" id="email" name="email" placeholder="Email" required>
+                            <input aria-label="street" type="text" id="street" name="street" placeholder="Street" required>
+                            <input aria-label="postcode" type="text" id="postcode" name="postcode" placeholder="Postcode" required>
+                            <input type="submit" value="Register"/>
+                        </form>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><p>Already have an account? <a href="/auth/login">Login here</a></p></td>
+                </tr>
+            </table>
+    </center>
+</body>
+</html>

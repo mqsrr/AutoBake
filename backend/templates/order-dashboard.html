@@ -1,0 +1,30 @@
+<html lang="en">
+<head>
+    <meta http-equiv="refresh" content="3">
+    <link href="../static/styles/order-dashboard.css" type="text/css" rel="stylesheet">
+    <title>Order Dashboard</title>
+</head>
+<body>
+    <center>
+        <h1>Who is up next</h1>
+    </center>
+    <div>
+        <center>
+            <table>
+                <tr>
+                    <th class="table_title">Order number</th>
+                    <th class="table_title">Customer name</th>
+                    <th class="table_title">Status</th>
+                </tr>
+                {% for order in orders %}
+                <tr>
+                    <td><p>{{ order.id }}</p></td>
+                    <td><p>{{ order.customer.name }}</p></td>
+                    <td><p>{{ order.order_state.value }}</p></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </center>
+    </div>
+</body>
+</html>

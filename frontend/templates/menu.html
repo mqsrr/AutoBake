@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <link rel="stylesheet" href="../static/styles/styles.css">
+    <script src="../static/scripts/menu.js" async></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Menu</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/special_offers">Special Offers</a></li>
+                <li><a id="cart-link" href="/view_cart">Cart <span id="cart-counter"></span></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="menu">
+    <div class="container">
+        <h2>Pizzas</h2>
+        <div class="menu-items">
+            {% for item in menu %}
+                <div class="menu-item">
+                    <img src="{{ url_for('static', filename='images/' + item['image']) }}" alt="{{ item['name'] }}">
+                    <h3>{{ item['name'] }}</h3>
+                    <p>{{ item['description'] }}</p>
+                    <div class="price-and-quantity">
+                            <p class="price">${{ item['price'] }}</p>
+                            <div class="quantity-section">
+                                <input type="number" id="quantity_{{ item['id'] }}" min="1" value="1" class="quantity-input">
+                            </div>
+                        </div>
+                    <button id="addToCartBtn" type="button" class="btn add-to-cart-btn"
+                            onclick="addToCart({{ item['id'] }})">Add to Cart
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="container">
+        <p>&copy; 2024 Pizza Restaurant. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>
